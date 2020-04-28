@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 """ Index of the route """
 from api.v1.views import app_views
 from flask import jsonify
