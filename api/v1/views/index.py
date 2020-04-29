@@ -2,13 +2,13 @@
 """ Index of the route """
 from api.v1.views import app_views
 from flask import jsonify
-from models import storage
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status():
     ''' Returns a JSON file with "status": "OK" '''
     return jsonify({"status": "OK"})
+<<<<<<< HEAD
 
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
@@ -21,3 +21,8 @@ def stats():
     for cls in classes.keys():
         stats_dict[classes[cls]] = storage.count(cls)
     return jsonify(stats_dict)
+
+if __name__ == "__main__":
+    pass
+=======
+>>>>>>> parent of ba98d5e... [ADD]index: endpoint that retrieves the number of each objects by type
