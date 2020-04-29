@@ -92,7 +92,7 @@ class DBStorage:
         if cls is None:
             total = 0
             for v in classes.values():
-                total += len(self.all(cls).values())
+                total += len(self.all(v).values())
         else:
             total = len(self.all(cls).values())
 
