@@ -60,12 +60,13 @@ def create_place(city_id):
         abort(404)
     if 'name' not in kwargs:
         abort(400, description="Missing name")
-    if 'city_id' not in kwargs:
-        kwargs['city_id'] = city_id
+    # if 'city_id' not in kwargs:
+    #    kwargs['city_id'] = city_id
     place = Place(**kwargs)
+    place.city_id = city_id
     storage.new(place)
     storage.save()
-    return jsonify(place.to_dict()), 201
+    return (jsonify(place.to_dict()), 201)
 
 
 @app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
