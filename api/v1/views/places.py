@@ -13,8 +13,6 @@ from models.user import User
 def all_Places(city_id):
     """all Place City ID """
     dic = []
-    if item_locator(city_id, 'City') is False:
-        abort(404)
     places = storage.all('Place').items()
     for key, value in places:
         if value.to_dict()['city_id'] == city_id:
@@ -55,10 +53,10 @@ def create_place(city_id):
     if city is None:
         abort(404)
     if 'user_id' not in request.get_json():
-      abort(400, description="Missing user_id")
+        abort(400, description="Missing user_id")
     if 'name' not in request.get_json():
-    abort(400, description="Missing name")
-      kwargs = request.get_json()
+        abort(400, description="Missing name")
+    kwargs = request.get_json()
     if not item_locator(kwargs['user_id'], 'User'):
         abort(404)
     place = Place(**kwargs)
@@ -70,7 +68,7 @@ def create_place(city_id):
 @app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
 def upd_place(place_id):
     """Update Place"""
-    place = storage.get(Place, place_id)
+    place = storage.get('Place', place_id)
     print("--> {}".format(place))
     if not place:
         abort(404)
@@ -87,7 +85,7 @@ def upd_place(place_id):
 def item_locator(id, item):
     """items list"""
     if item == 'User':
-        users = storage.all(User).items()
+        users = storage.all('User').items()
         for key, value in users:
             if value.to_dict()['id'] == id:
                 return True
