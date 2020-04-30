@@ -13,6 +13,8 @@ from models.user import User
 def all_Places(city_id):
     """all Place City ID """
     dic = []
+    if item_locator(city_id, 'City') is False:
+        abort(404)
     places = storage.all('Place').items()
     for key, value in places:
         if value.to_dict()['city_id'] == city_id:
