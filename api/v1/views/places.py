@@ -13,7 +13,7 @@ from models.user import User
 def all_Places(city_id):
     """all Place City ID """
     dic = []
-    places = storage.all('Place').items()
+    places = storage.all(Place).items()
     for key, value in places:
         if value.to_dict()['city_id'] == city_id:
             dic.append(value.to_dict())
