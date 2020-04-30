@@ -49,18 +49,20 @@ def delete_place(place_id):
                  strict_slashes=False)
 def create_place(city_id):
     """ Create a Place """
-    if not request.get_json():
-        abort(400, description="Not a JSON")
-    city = storage.get(City, city_id)
+    if not (request.is_json):
+        abort(400, "Not a JSON")
+    city = storage.get('City', city_id)
     if city is None:
         abort(404)
-    if 'user_id' not in request.get_json():
-        abort(400, description="Missing user_id")
-    if 'name' not in request.get_json():
-        abort(400, description="Missing name")
     kwargs = request.get_json()
-    if not item_locator(kwargs['user_id'], 'User'):
+    if 'user_id' not in kwargs:
+        abort(400, "Missing user_id")
+    elif item_locator(kwargs['user_id'], 'User') is False:
         abort(404)
+    if 'name' not in kwargs:
+        abort(400, "Missing name")
+    if 'city_id' not in kwargs:
+        kwargs['city_id'] = city_id
     place = Place(**kwargs)
     storage.new(place)
     storage.save()
