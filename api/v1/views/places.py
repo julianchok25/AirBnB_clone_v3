@@ -70,7 +70,7 @@ def create_place(city_id):
 @app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
 def upd_place(place_id):
     """Update Place"""
-    place = storage.get('Place', place_id)
+    place = storage.get(Place, place_id)
     print("--> {}".format(place))
     if not place:
         abort(404)
@@ -87,7 +87,7 @@ def upd_place(place_id):
 def item_locator(id, item):
     """items list"""
     if item == 'User':
-        users = storage.all('User').items()
+        users = storage.all(User).items()
         for key, value in users:
             if value.to_dict()['id'] == id:
                 return True
