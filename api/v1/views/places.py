@@ -50,13 +50,13 @@ def create_place(city_id):
     if city_id its not found, 404 error return """
     if not (request.is_json):
         abort(400, "Not a JSON")
-    city = storage.get('City', city_id)
+    city = storage.get(City, city_id)
     if city is None:
         abort(404)
     kwargs = request.get_json()
     if 'user_id' not in kwargs:
         abort(400, "Missing user_id")
-    elif item_locator(kwargs['user_id'], 'User') is False:
+    elif item_locator(kwargs['user_id'], User) is False:
         abort(404)
     if 'name' not in kwargs:
         abort(400, "Missing name")
@@ -87,13 +87,13 @@ def upd_place(place_id):
 
 def item_locator(id, item):
     """items list"""
-    if item == 'User':
+    if item == User:
         users = storage.all(User).items()
         for key, value in users:
             if value.to_dict()['id'] == id:
                 return True
         return False
-    if item == 'Place':
+    if item == Place:
         place = storage.all(Place).items()
         for key, value in place:
             if value.to_dict()['id'] == id:
