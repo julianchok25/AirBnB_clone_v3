@@ -12,7 +12,7 @@ from models.base_model import BaseModel
 def all_amenities_place(place_id):
     """Retrieves the list of all Amenity objects of a Place"""
     amenities = []
-    place = storage.get('Place', place_id)
+    place = storage.get(Place, place_id)
     if place is None:
         abort(404)
     amenity = place.amenities
@@ -25,10 +25,10 @@ def all_amenities_place(place_id):
                  methods=['DELETE'], strict_slashes=False)
 def del_amenities_place(place_id, amenity_id):
     """Deletes an Amenity object to a Place"""
-    place = storage.get('Place', place_id)
+    place = storage.get(Place, place_id)
     if place is None:
         abort(404)
-    amenity = storage.get('Amenity', amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     if amenity_id not in [ameni.id for ameni in place.amenities]:
@@ -42,10 +42,10 @@ def del_amenities_place(place_id, amenity_id):
                  methods=['POST'])
 def link_place_amenity(place_id, amenity_id):
     """Link a Amenity object to a Place"""
-    place = storage.get('Place', place_id)
+    place = storage.get(Place, place_id)
     if place is None:
         abort(404)
-    amenity = storage.get('Amenity', amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     if amenity_id in [ameni.id for ameni in place.amenities]:
