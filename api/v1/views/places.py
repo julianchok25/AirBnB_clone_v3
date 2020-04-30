@@ -48,18 +48,18 @@ def delete_place(place_id):
 def create_place(city_id):
     """ Create a Place, and return their dictionary representation
     if city_id its not found, 404 error return """
-    if not (request.is_json):
-        abort(400, "Not a JSON")
+    if not request.get_json():
+        abort(400, description="Not a JSON")
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
     kwargs = request.get_json()
     if 'user_id' not in kwargs:
-        abort(400, "Missing user_id")
+        abort(400, description="Missing user_id")
     elif item_locator(kwargs['user_id'], User) is False:
         abort(404)
     if 'name' not in kwargs:
-        abort(400, "Missing name")
+        abort(400, description="Missing name")
     if 'city_id' not in kwargs:
         kwargs['city_id'] = city_id
     place = Place(**kwargs)
