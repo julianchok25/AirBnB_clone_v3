@@ -91,7 +91,7 @@ def item_locator(id, item):
                 return True
         return False
     if item == 'Place':
-        place = storage.all('Place').items()
+        place = storage.all(Place).items()
         for key, value in place:
             if value.to_dict()['id'] == id:
                 return True
