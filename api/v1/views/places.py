@@ -13,7 +13,7 @@ from models.user import User
 def all_Places(city_id):
     """all Place City ID """
     dic = []
-    places = storage.all(Place).items()
+    places = storage.all('Place').items()
     for key, value in places:
         if value.to_dict()['city_id'] == city_id:
             dic.append(value.to_dict())
@@ -88,13 +88,13 @@ def upd_place(place_id):
 def item_locator(id, item):
     """items list"""
     if item == User:
-        users = storage.all(User).items()
+        users = storage.all('User').items()
         for key, value in users:
             if value.to_dict()['id'] == id:
                 return True
         return False
     if item == Place:
-        place = storage.all(Place).items()
+        place = storage.all('Place').items()
         for key, value in place:
             if value.to_dict()['id'] == id:
                 return True
