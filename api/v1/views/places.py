@@ -72,7 +72,7 @@ def create_place(city_id):
 def upd_place(place_id):
     """Update Place"""
     place = storage.get(Place, place_id)
-    print("--> {}".format(place))
+    ignore_list = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
     if not place:
         abort(404)
     json_content = request.get_json()
